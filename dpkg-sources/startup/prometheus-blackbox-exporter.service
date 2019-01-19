@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus blackbox exporter for machine metrics
+Documentation=https://github.com/prometheus/blackbox_exporter
+
+[Service]
+Restart=always
+User=prometheus
+EnvironmentFile=/etc/default/prometheus-blackbox-exporter
+ExecStart=/usr/bin/prometheus-blackbox-exporter $ARGS
+ExecReload=/bin/kill -HUP $MAINPID
+TimeoutStopSec=20s
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target
